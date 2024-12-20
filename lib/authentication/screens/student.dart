@@ -1,14 +1,15 @@
+import 'package:amizone_frontend/dashboard/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class StugentLogin extends StatefulWidget {
-  const StugentLogin({super.key});
+class StudentLogin extends StatefulWidget {
+  const StudentLogin({super.key});
 
   @override
-  State<StugentLogin> createState() => _StugentLoginState();
+  State<StudentLogin> createState() => _StudentLoginState();
 }
 
-class _StugentLoginState extends State<StugentLogin> {
+class _StudentLoginState extends State<StudentLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,7 +104,10 @@ class _StugentLoginState extends State<StugentLogin> {
                     inputField(hintInput: "Password", icon: Icons.lock),
                     const SizedBox(height: 40),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (ctx) => const AmizoneDashboard()));
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromARGB(255, 20, 215, 10),
                         minimumSize: const Size(double.infinity, 50),
