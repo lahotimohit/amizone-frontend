@@ -1,3 +1,4 @@
+import 'package:amizone_frontend/subjects/sub_screen.dart';
 import 'package:amizone_frontend/wifi/wifi_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -41,7 +42,8 @@ class CustomMenuBar extends StatelessWidget {
                       icon: Icons.book,
                       title: 'My Courses',
                       onTap: () {
-                        Navigator.pop(context);
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (ctx) => MyCoursesScreen()));
                       },
                     ),
                     MenuListTile(
