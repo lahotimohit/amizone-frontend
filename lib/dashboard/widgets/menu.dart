@@ -1,3 +1,4 @@
+import 'package:amizone_frontend/faculties/faculty.dart';
 import 'package:amizone_frontend/subjects/sub_screen.dart';
 import 'package:amizone_frontend/time_table/time_table.dart';
 import 'package:amizone_frontend/wifi/wifi_screen.dart';
@@ -66,7 +67,8 @@ class CustomMenuBar extends StatelessWidget {
                       icon: Icons.people,
                       title: 'My Faculty',
                       onTap: () {
-                        Navigator.pop(context);
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (ctx) => FacultyListScreen()));
                       },
                     ),
                     MenuListTile(
