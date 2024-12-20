@@ -1,4 +1,5 @@
 import 'package:amizone_frontend/dashboard/widgets/calendar.dart';
+import 'package:amizone_frontend/dashboard/widgets/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -13,7 +14,10 @@ class AmizoneDashboard extends StatefulWidget {
 class _AmizoneDashboardState extends State<AmizoneDashboard> {
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
+      key: scaffoldKey,
+      drawer: const CustomMenuBar(),
       backgroundColor: Colors.white,
       body: Column(
         children: [
@@ -39,7 +43,9 @@ class _AmizoneDashboardState extends State<AmizoneDashboard> {
                               color: Colors.white,
                               size: 28,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              scaffoldKey.currentState?.openDrawer();
+                            },
                           ),
                         ),
                         const SizedBox(
