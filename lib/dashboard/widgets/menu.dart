@@ -1,3 +1,4 @@
+import 'package:amizone_frontend/wifi/wifi_screen.dart';
 import 'package:flutter/material.dart';
 
 class CustomMenuBar extends StatelessWidget {
@@ -97,8 +98,13 @@ class CustomMenuBar extends StatelessWidget {
                         icon: Icons.public, title: 'The Global Times'),
                     const MenuListTile(
                         icon: Icons.pause_presentation, title: 'NTCC'),
-                    const MenuListTile(
-                        icon: Icons.wifi, title: 'Register for Wifi'),
+                    MenuListTile(
+                        icon: Icons.wifi,
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (ctx) => WifiScreen()));
+                        },
+                        title: 'Register for Wifi'),
                     const MenuListTile(
                         icon: Icons.report, title: 'Research Repository'),
                     const MenuListTile(

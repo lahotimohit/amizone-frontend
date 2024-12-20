@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-Widget UniversalAppBar(GlobalKey<ScaffoldState> scaffoldKey) {
+Widget universalAppBar(GlobalKey<ScaffoldState> scaffoldKey) {
   return Container(
     color: const Color(0xFF003B70),
     child: SafeArea(

@@ -22,7 +22,7 @@ class _AmizoneDashboardState extends State<AmizoneDashboard> {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          UniversalAppBar(scaffoldKey),
+          universalAppBar(scaffoldKey),
           Expanded(
             child: SingleChildScrollView(
               child: Column(
