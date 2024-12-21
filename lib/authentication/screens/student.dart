@@ -1,6 +1,7 @@
 import 'package:amizone_frontend/dashboard/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class StudentLogin extends StatefulWidget {
   const StudentLogin({super.key});
@@ -10,6 +11,15 @@ class StudentLogin extends StatefulWidget {
 }
 
 class _StudentLoginState extends State<StudentLogin> {
+  final Uri adminPageUri =
+      Uri.parse("https://amizone-backend-nane.vercel.app/admin");
+
+  Future<void> _launchUrl() async {
+    if (!await launchUrl(adminPageUri)) {
+      throw Exception('Could not launch $adminPageUri');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +83,7 @@ class _StudentLoginState extends State<StudentLogin> {
                       ],
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: _launchUrl,
                       child: Text(
                         'Click here for admin login',
                         style: GoogleFonts.poppins(
