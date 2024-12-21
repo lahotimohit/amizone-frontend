@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:amizone_frontend/api/endpoints.dart';
 import 'package:amizone_frontend/dashboard/models/class_schedule.dart';
 import 'package:amizone_frontend/services/storage.dart';
 import 'package:http/http.dart' as http;
@@ -10,8 +11,7 @@ Future<Map<int, List<ClassSchedule>>> classSchedules(String day) async {
   await storage.readData("enrollment").then((value) {
     enrollment = value.toString();
   });
-  var timeTableUrl = Uri.parse(
-      "https://amizone-backend-nane.vercel.app/tt/api/get-classes-by-day");
+  var timeTableUrl = Uri.parse(getClassesByDay);
   var response = await http
       .post(timeTableUrl, body: {"day": day, "enrollment": enrollment});
   final Map<String, dynamic> responseData = jsonDecode(response.body);

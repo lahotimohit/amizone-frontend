@@ -1,3 +1,4 @@
+import 'package:amizone_frontend/api/endpoints.dart';
 import 'package:amizone_frontend/authentication/api/login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,8 +25,7 @@ class _StudentLoginState extends State<StudentLogin> {
     passwordController.dispose();
   }
 
-  final Uri adminPageUri =
-      Uri.parse("https://amizone-backend-nane.vercel.app/admin");
+  final Uri adminPageUri = Uri.parse(adminLoginURL);
 
   Future<void> _launchUrl() async {
     if (!await launchUrl(adminPageUri)) {

@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:amizone_frontend/api/endpoints.dart';
 import 'package:amizone_frontend/appbar/appbar.dart';
 import 'package:amizone_frontend/services/storage.dart';
 import 'package:flutter/material.dart';
@@ -29,8 +29,7 @@ class _MyCoursesScreenState extends State<MyCoursesScreen> {
     await storage.readData("enrollment").then((value) {
       enrollment = value.toString();
     });
-    var courseURL = Uri.parse(
-        "https://amizone-backend-nane.vercel.app/api/get-all-subjects");
+    var courseURL = Uri.parse(getAllSubjects);
     var response = await http.post(courseURL, body: {"enrollment": enrollment});
     await Future.delayed(const Duration(seconds: 1));
     return CourseResponse.fromJson(jsonDecode(response.body));

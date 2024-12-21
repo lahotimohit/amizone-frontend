@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:amizone_frontend/api/endpoints.dart';
 import 'package:amizone_frontend/appbar/appbar.dart';
 import 'package:amizone_frontend/faculties/models/facult_model.dart';
 import 'package:amizone_frontend/services/storage.dart';
@@ -55,8 +56,7 @@ class FacultyListScreen extends StatelessWidget {
     await storage.readData("enrollment").then((value) {
       enrollment = value.toString();
     });
-    var getFacultyUrl = Uri.parse(
-        "https://amizone-backend-nane.vercel.app/api/get-all-faculties");
+    var getFacultyUrl = Uri.parse(getAllFaculties);
     var response =
         await http.post(getFacultyUrl, body: {"enrollment": enrollment});
     return FacultyResponse.fromJson(jsonDecode(response.body));
