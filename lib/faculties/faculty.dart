@@ -1,79 +1,10 @@
+import 'dart:convert';
+
 import 'package:amizone_frontend/appbar/appbar.dart';
+import 'package:amizone_frontend/faculties/models/facult_model.dart';
+import 'package:amizone_frontend/services/storage.dart';
 import 'package:flutter/material.dart';
-
-// Model classes
-class FacultyResponse {
-  final String status;
-  final FacultyData data;
-
-  FacultyResponse({required this.status, required this.data});
-
-  factory FacultyResponse.fromJson(Map<String, dynamic> json) {
-    return FacultyResponse(
-      status: json['status'],
-      data: FacultyData.fromJson(json['data']),
-    );
-  }
-}
-
-class FacultyData {
-  final String studentName;
-  final String course;
-  final int semester;
-  final List<Subject> subjects;
-
-  FacultyData({
-    required this.studentName,
-    required this.course,
-    required this.semester,
-    required this.subjects,
-  });
-
-  factory FacultyData.fromJson(Map<String, dynamic> json) {
-    return FacultyData(
-      studentName: json['student_name'],
-      course: json['course'],
-      semester: json['semester'],
-      subjects:
-          (json['subjects'] as List).map((e) => Subject.fromJson(e)).toList(),
-    );
-  }
-}
-
-class Subject {
-  final String subjectCode;
-  final String subjectName;
-  final List<Faculty> faculty;
-
-  Subject({
-    required this.subjectCode,
-    required this.subjectName,
-    required this.faculty,
-  });
-
-  factory Subject.fromJson(Map<String, dynamic> json) {
-    return Subject(
-      subjectCode: json['subject_code'],
-      subjectName: json['subject_name'],
-      faculty:
-          (json['faculty'] as List).map((e) => Faculty.fromJson(e)).toList(),
-    );
-  }
-}
-
-class Faculty {
-  final String name;
-  final String profilePhoto;
-
-  Faculty({required this.name, required this.profilePhoto});
-
-  factory Faculty.fromJson(Map<String, dynamic> json) {
-    return Faculty(
-      name: json['name'],
-      profilePhoto: json['profile_photo'],
-    );
-  }
-}
+import 'package:http/http.dart' as http;
 
 class FacultyListScreen extends StatelessWidget {
   const FacultyListScreen({super.key});
@@ -88,7 +19,7 @@ class FacultyListScreen extends StatelessWidget {
             universalAppBar(scaffoldKey),
             ConstrainedBox(
               constraints: BoxConstraints(
-                  maxHeight: MediaQuery.of(context).size.height * 0.5),
+                  maxHeight: MediaQuery.of(context).size.height * 0.8),
               child: FutureBuilder<FacultyResponse>(
                 future: fetchFacultyData(),
                 builder: (context, snapshot) {
@@ -119,41 +50,16 @@ class FacultyListScreen extends StatelessWidget {
   }
 
   Future<FacultyResponse> fetchFacultyData() async {
-    // Simulate API call
-    await Future.delayed(const Duration(seconds: 1));
-    return FacultyResponse.fromJson({
-      "status": "success",
-      "data": {
-        "student_name": "Mohit Lahoti",
-        "course": "B.TECH (CSE)",
-        "semester": 7,
-        "subjects": [
-          {
-            "subject_code": "BCS702",
-            "subject_name": "Artificial Intelligence",
-            "faculty": [
-              {
-                "name": "Dr. Yashpal Singh",
-                "profile_photo":
-                    "https://cdn.pixabay.com/photo/2023/12/08/23/46/cat-8438334_1280.jpg"
-              }
-            ]
-          },
-          {
-            "subject_code": "BCS703",
-            "subject_name": "Artificial Intelligence Lab",
-            "faculty": [
-              {
-                "name": "Dr. Yashpal Singh",
-                "profile_photo":
-                    "https://cdn.pixabay.com/photo/2023/12/08/23/46/cat-8438334_1280.jpg"
-              }
-            ]
-          },
-          // Add more subjects as needed
-        ]
-      }
+    SecureStorage storage = SecureStorage();
+    String enrollment = "";
+    await storage.readData("enrollment").then((value) {
+      enrollment = value.toString();
     });
+    var getFacultyUrl = Uri.parse(
+        "https://amizone-backend-nane.vercel.app/api/get-all-faculties");
+    var response =
+        await http.post(getFacultyUrl, body: {"enrollment": enrollment});
+    return FacultyResponse.fromJson(jsonDecode(response.body));
   }
 }
 
@@ -192,15 +98,6 @@ class _SubjectCardState extends State<SubjectCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.subject.subjectName.contains('Lab')
-                            ? '[AI Lab]'
-                            : '[AI]',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
                         '[${widget.subject.subjectCode}]',
                         style: const TextStyle(
                           color: Colors.white,
@@ -215,7 +112,7 @@ class _SubjectCardState extends State<SubjectCard> {
                     padding: const EdgeInsets.all(12),
                     color: Colors.orange,
                     child: Text(
-                      '${widget.subject.subjectName} [${widget.subject.subjectName.contains('Lab') ? 'AI Lab' : 'AI'}] [${widget.subject.subjectCode}]',
+                      '${widget.subject.subjectName}[${widget.subject.subjectCode}]',
                       style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
