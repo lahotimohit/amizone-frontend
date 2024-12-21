@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TimeTable extends StatelessWidget {
+  const TimeTable({super.key});
+
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -20,7 +22,7 @@ class TimeTable extends StatelessWidget {
             ConstrainedBox(
                 constraints: BoxConstraints(
                     maxHeight: MediaQuery.of(context).size.height),
-                child: ClassScheduleScreen())
+                child: const ClassScheduleScreen())
           ],
         ),
       ),

@@ -117,7 +117,7 @@ Widget contentRow() {
         onPressed: () {},
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.blue,
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         ),
         child: const Text(
           'Delete',

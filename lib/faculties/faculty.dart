@@ -76,7 +76,7 @@ class Faculty {
 }
 
 class FacultyListScreen extends StatelessWidget {
-  const FacultyListScreen({Key? key}) : super(key: key);
+  const FacultyListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -160,7 +160,7 @@ class FacultyListScreen extends StatelessWidget {
 class SubjectCard extends StatefulWidget {
   final Subject subject;
 
-  const SubjectCard({Key? key, required this.subject}) : super(key: key);
+  const SubjectCard({super.key, required this.subject});
 
   @override
   _SubjectCardState createState() => _SubjectCardState();
@@ -172,7 +172,7 @@ class _SubjectCardState extends State<SubjectCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       child: Column(
         children: [
           InkWell(
@@ -184,8 +184,8 @@ class _SubjectCardState extends State<SubjectCard> {
             child: Row(
               children: [
                 Container(
-                  padding: EdgeInsets.all(12),
-                  decoration: BoxDecoration(
+                  padding: const EdgeInsets.all(12),
+                  decoration: const BoxDecoration(
                     color: Color(0xFF003B70),
                   ),
                   child: Column(
@@ -195,14 +195,14 @@ class _SubjectCardState extends State<SubjectCard> {
                         widget.subject.subjectName.contains('Lab')
                             ? '[AI Lab]'
                             : '[AI]',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(
                         '[${widget.subject.subjectCode}]',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
@@ -212,11 +212,11 @@ class _SubjectCardState extends State<SubjectCard> {
                 ),
                 Expanded(
                   child: Container(
-                    padding: EdgeInsets.all(12),
+                    padding: const EdgeInsets.all(12),
                     color: Colors.orange,
                     child: Text(
                       '${widget.subject.subjectName} [${widget.subject.subjectName.contains('Lab') ? 'AI Lab' : 'AI'}] [${widget.subject.subjectCode}]',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
@@ -229,9 +229,9 @@ class _SubjectCardState extends State<SubjectCard> {
           // Faculty details (expandable)
           if (isExpanded)
             AnimatedContainer(
-              duration: Duration(milliseconds: 300),
+              duration: const Duration(milliseconds: 300),
               child: Container(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 color: Colors.grey[200],
                 child: Row(
                   children: [
@@ -244,18 +244,18 @@ class _SubjectCardState extends State<SubjectCard> {
                               backgroundImage:
                                   NetworkImage(faculty.profilePhoto),
                             ),
-                            SizedBox(width: 16),
+                            const SizedBox(width: 16),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     faculty.name,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  SizedBox(height: 8),
+                                  const SizedBox(height: 8),
                                   Wrap(
                                     spacing: 8,
                                     runSpacing: 8,
@@ -263,8 +263,8 @@ class _SubjectCardState extends State<SubjectCard> {
                                       SizedBox(
                                         height: 36,
                                         child: ElevatedButton.icon(
-                                          icon: Icon(Icons.feedback),
-                                          label: Text('Feedback'),
+                                          icon: const Icon(Icons.feedback),
+                                          label: const Text('Feedback'),
                                           onPressed: () {},
                                           style: ElevatedButton.styleFrom(
                                             backgroundColor: Colors.blue,

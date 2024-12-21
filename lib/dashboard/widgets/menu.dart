@@ -5,7 +5,7 @@ import 'package:amizone_frontend/wifi/wifi_screen.dart';
 import 'package:flutter/material.dart';
 
 class CustomMenuBar extends StatelessWidget {
-  const CustomMenuBar({Key? key}) : super(key: key);
+  const CustomMenuBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class CustomMenuBar extends StatelessWidget {
                       title: 'My Courses',
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (ctx) => MyCoursesScreen()));
+                            builder: (ctx) => const MyCoursesScreen()));
                       },
                     ),
                     MenuListTile(
@@ -68,7 +68,7 @@ class CustomMenuBar extends StatelessWidget {
                       title: 'My Faculty',
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (ctx) => FacultyListScreen()));
+                            builder: (ctx) => const FacultyListScreen()));
                       },
                     ),
                     MenuListTile(
@@ -143,21 +143,21 @@ class MenuListTile extends StatelessWidget {
   final VoidCallback? onTap;
 
   const MenuListTile({
-    Key? key,
+    super.key,
     required this.icon,
     required this.title,
     this.hasSubmenu = false,
     this.isSelected = false,
     this.backgroundColor,
     this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       color: backgroundColor,
       child: ListTile(
-        contentPadding: EdgeInsets.all(0),
+        contentPadding: const EdgeInsets.all(0),
         leading: Icon(
           icon,
           color: isSelected ? const Color(0xFF003B70) : Colors.grey[600],

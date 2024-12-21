@@ -130,7 +130,7 @@ class _ClassScheduleScreenState extends State<ClassScheduleScreen> {
                         color: Color.fromARGB(255, 214, 214, 214),
                       ),
                       ListView.builder(
-                        padding: EdgeInsets.all(0),
+                        padding: const EdgeInsets.all(0),
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount:
