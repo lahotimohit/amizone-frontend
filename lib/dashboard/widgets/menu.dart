@@ -5,6 +5,7 @@ import 'package:amizone_frontend/subjects/sub_screen.dart';
 import 'package:amizone_frontend/time_table/time_table.dart';
 import 'package:amizone_frontend/wifi/wifi_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomMenuBar extends StatelessWidget {
   const CustomMenuBar({super.key});
@@ -176,10 +177,10 @@ class MenuListTile extends StatelessWidget {
         ),
         title: Text(
           title,
-          style: TextStyle(
-            color: isSelected ? const Color(0xFF003B70) : Colors.grey[600],
-            fontSize: 14,
-          ),
+          style: GoogleFonts.poppins(
+              color: isSelected ? const Color(0xFF003B70) : Colors.grey[800],
+              fontSize: 13,
+              fontWeight: FontWeight.w500),
         ),
         trailing: hasSubmenu
             ? Icon(

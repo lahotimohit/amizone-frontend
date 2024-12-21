@@ -10,6 +10,7 @@ class TimeTable extends StatelessWidget {
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
+      key: scaffoldKey,
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(

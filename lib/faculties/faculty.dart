@@ -19,7 +19,7 @@ class FacultyListScreen extends StatelessWidget {
             universalAppBar(scaffoldKey),
             ConstrainedBox(
               constraints: BoxConstraints(
-                  maxHeight: MediaQuery.of(context).size.height * 0.8),
+                  maxHeight: MediaQuery.of(context).size.height * 0.72),
               child: FutureBuilder<FacultyResponse>(
                 future: fetchFacultyData(),
                 builder: (context, snapshot) {
