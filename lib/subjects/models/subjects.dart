@@ -58,3 +58,34 @@ class Attendance {
     );
   }
 }
+
+class CourseResponse {
+  final String status;
+  final String studentName;
+  final String enrollment;
+  final String course;
+  final int semester;
+  final List<Subject> studentSubjects;
+
+  CourseResponse({
+    required this.status,
+    required this.studentName,
+    required this.enrollment,
+    required this.course,
+    required this.semester,
+    required this.studentSubjects,
+  });
+
+  factory CourseResponse.fromJson(Map<String, dynamic> json) {
+    return CourseResponse(
+      status: json['status'],
+      studentName: json['student_name'],
+      enrollment: json['enrollment'],
+      course: json['course'],
+      semester: json['semester'],
+      studentSubjects: (json['student_subjects'] as List)
+          .map((e) => Subject.fromJson(e))
+          .toList(),
+    );
+  }
+}

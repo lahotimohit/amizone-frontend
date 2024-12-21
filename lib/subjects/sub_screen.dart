@@ -1,38 +1,11 @@
+import 'dart:convert';
+
 import 'package:amizone_frontend/appbar/appbar.dart';
+import 'package:amizone_frontend/services/storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:amizone_frontend/subjects/models/subjects.dart';
-
-class CourseResponse {
-  final String status;
-  final String studentName;
-  final String enrollment;
-  final String course;
-  final int semester;
-  final List<Subject> studentSubjects;
-
-  CourseResponse({
-    required this.status,
-    required this.studentName,
-    required this.enrollment,
-    required this.course,
-    required this.semester,
-    required this.studentSubjects,
-  });
-
-  factory CourseResponse.fromJson(Map<String, dynamic> json) {
-    return CourseResponse(
-      status: json['status'],
-      studentName: json['student_name'],
-      enrollment: json['enrollment'],
-      course: json['course'],
-      semester: json['semester'],
-      studentSubjects: (json['student_subjects'] as List)
-          .map((e) => Subject.fromJson(e))
-          .toList(),
-    );
-  }
-}
+import 'package:http/http.dart' as http;
 
 class MyCoursesScreen extends StatefulWidget {
   const MyCoursesScreen({super.key});
@@ -47,54 +20,20 @@ class _MyCoursesScreenState extends State<MyCoursesScreen> {
   @override
   void initState() {
     super.initState();
-    // Initialize the future in initState
     _coursesFuture = fetchCourses();
   }
 
   Future<CourseResponse> fetchCourses() async {
-    // Simulated API call - replace with actual API call
-    await Future.delayed(const Duration(seconds: 1));
-    return CourseResponse.fromJson({
-      "status": "success",
-      "student_name": "Mohit Lahoti",
-      "enrollment": "A20405221143",
-      "course": "B.TECH (CSE)",
-      "semester": 7,
-      "student_subjects": [
-        {
-          "subject_code": "BCS702",
-          "subject_name": "Artificial Intelligence",
-          "course": "B.TECH (CSE)",
-          "semester": 7,
-          "credits": 4,
-          "subject_type": "Compulsory",
-          "description": "",
-          "attendance": {
-            "present": 35,
-            "absent": 5,
-            "late": 0,
-            "total_classes": 40,
-            "attendance_percentage": 87.50
-          }
-        },
-        {
-          "subject_code": "BCS703",
-          "subject_name": "Information & Storage Management",
-          "course": "B.TECH (CSE)",
-          "semester": 7,
-          "credits": 4,
-          "subject_type": "Compulsory",
-          "description": "",
-          "attendance": {
-            "present": 35,
-            "absent": 8,
-            "late": 0,
-            "total_classes": 43,
-            "attendance_percentage": 84.50
-          }
-        },
-      ]
+    SecureStorage storage = SecureStorage();
+    String enrollment = "";
+    await storage.readData("enrollment").then((value) {
+      enrollment = value.toString();
     });
+    var courseURL = Uri.parse(
+        "https://amizone-backend-nane.vercel.app/api/get-all-subjects");
+    var response = await http.post(courseURL, body: {"enrollment": enrollment});
+    await Future.delayed(const Duration(seconds: 1));
+    return CourseResponse.fromJson(jsonDecode(response.body));
   }
 
   @override
