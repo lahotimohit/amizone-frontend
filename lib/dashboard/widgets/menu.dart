@@ -1,4 +1,6 @@
+import 'package:amizone_frontend/authentication/screens/student.dart';
 import 'package:amizone_frontend/faculties/faculty.dart';
+import 'package:amizone_frontend/services/storage.dart';
 import 'package:amizone_frontend/subjects/sub_screen.dart';
 import 'package:amizone_frontend/time_table/time_table.dart';
 import 'package:amizone_frontend/wifi/wifi_screen.dart';
@@ -9,6 +11,7 @@ class CustomMenuBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SecureStorage storage = SecureStorage();
     return Drawer(
       width: MediaQuery.of(context).size.width * 0.6,
       child: Container(
@@ -121,7 +124,16 @@ class CustomMenuBar extends StatelessWidget {
                         icon: Icons.feedback, title: 'Apply for Transcript'),
                     const MenuListTile(
                         icon: Icons.outbond, title: 'Withdrawal'),
-                    const MenuListTile(icon: Icons.logout, title: 'Logout'),
+                    MenuListTile(
+                        icon: Icons.logout,
+                        onTap: () {
+                          storage.deleteData("enrollment");
+                          Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(builder: (ctx) => StudentLogin()),
+                            (Route<dynamic> route) => false,
+                          );
+                        },
+                        title: 'Logout'),
                   ],
                 ),
               ),
