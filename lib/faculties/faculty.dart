@@ -69,7 +69,7 @@ class SubjectCard extends StatefulWidget {
   const SubjectCard({super.key, required this.subject});
 
   @override
-  _SubjectCardState createState() => _SubjectCardState();
+  State<SubjectCard> createState() => _SubjectCardState();
 }
 
 class _SubjectCardState extends State<SubjectCard> {

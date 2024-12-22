@@ -8,7 +8,7 @@ import 'package:amizone_frontend/dashboard/data/class_schedule.dart';
 class ClassScheduleScreen extends StatefulWidget {
   const ClassScheduleScreen({super.key});
   @override
-  _ClassScheduleScreenState createState() => _ClassScheduleScreenState();
+  State<ClassScheduleScreen> createState() => _ClassScheduleScreenState();
 }
 
 class _ClassScheduleScreenState extends State<ClassScheduleScreen> {

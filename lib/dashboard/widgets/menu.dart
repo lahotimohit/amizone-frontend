@@ -63,8 +63,8 @@ class CustomMenuBar extends StatelessWidget {
                       icon: Icons.schedule,
                       title: 'Time Table',
                       onTap: () {
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (ctx) => TimeTable()));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (ctx) => const TimeTable()));
                       },
                     ),
                     MenuListTile(
@@ -130,7 +130,8 @@ class CustomMenuBar extends StatelessWidget {
                         onTap: () {
                           storage.deleteData("enrollment");
                           Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(builder: (ctx) => StudentLogin()),
+                            MaterialPageRoute(
+                                builder: (ctx) => const StudentLogin()),
                             (Route<dynamic> route) => false,
                           );
                         },
