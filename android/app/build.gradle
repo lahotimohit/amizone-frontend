@@ -4,6 +4,11 @@ plugins {
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
 }
+dependencies {
+    implementation 'com.google.errorprone:error_prone_annotations:2.10.0'
+    implementation 'com.google.code.findbugs:jsr305:3.0.2'
+    // ... other existing dependencies
+}
 
 android {
     namespace = "com.example.amizone_frontend"
